@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details Console</title>
+</head>
+<body>
+    <h2>Open console (F12) to see results</h2>
+
+<script>
+// Sample product database
+const products = [
+    { id: 1, name: "Laptop", price: 999.99, description: "High-performance laptop" },
+    { id: 2, name: "Smartphone", price: 499.99, description: "Latest model smartphone" },
+    { id: 3, name: "Headphones", price: 99.99, description: "Wireless headphones" }
+];
+
+function getProductDetails(productId, successCallback, errorCallback) {
+    console.log(`\nSearching for product with ID: ${productId}`);
+    console.log('------------------------');
+    
+    setTimeout(() => {
+        const product = products.find(p => p.id === productId);
+        
+        if (product) {
+            successCallback(product);
+        } else {
+            errorCallback(`Product with ID ${productId} not found`);
+        }
+    }, 1000);
+}
+
+// Success callback
+function handleSuccess(product) {
+    console.log('SUCCESS:');
+    console.log('Product details:');
+    console.table(product); // Using console.table for better visualization
+    console.log('------------------------');
+}
+
+// Error callback
+function handleError(error) {
+    console.log('ERROR:');
+    console.error(error);
+    console.log('------------------------');
+}
+
+// Function to test in console
+function testProduct(id) {
+    console.clear(); // Clear previous console output
+    console.log('Starting product search test...');
+    getProductDetails(id, handleSuccess, handleError);
+}
+
+// Initial tests when page loads
+console.log('Product Details Testing');
+console.log('======================');
+console.log('Available test commands:');
+console.log('testProduct(id) - Test with specific product ID');
+console.log('Example: testProduct(1)');
+console.log('\nAvailable products:');
+console.table(products); // Show available products in table format
+
+// Can be tested in console using:
+// testProduct(1) - for existing product
+// testProduct(99) - for non-existent product
+</script>
+
+</body>
+</html>
