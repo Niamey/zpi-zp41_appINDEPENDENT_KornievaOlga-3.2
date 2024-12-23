@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Brackets</title>
+</head>
+<body>
+    <h1>Bracket Checker</h1>
+    <textarea id="codeInput" rows="10" cols="50" placeholder="Введіть JavaScript код"></textarea>
+    <br>
+    <button onclick="checkCode()">Перевірити дужки</button>
+
+    <div id="result"></div> <!-- Місце для відображення результату на сторінці -->
+
+    <script>
+        function checkBrackets(str) {
+            const stack = [];
+            const brackets = {
+                '(': ')',
+                '{': '}',
+                '[': ']'
+            };
+
+            for (const char of str) {
+                if (brackets[char]) {
+                    stack.push(char); // Відкриваюча дужка
+                } else if (Object.values(brackets).includes(char)) {
+                    if (brackets[stack.pop()] !== char) {
+                        return false; // Невідповідність дужок
+                    }
+                }
+            }
+
+            return stack.length === 0; // Перевірка, чи всі дужки закриті
+        }
+
+        function checkCode() {
+            const input = document.getElementById('codeInput').value;
+            const result = checkBrackets(input);
+
+            // Вивести результат у консоль
+            console.log(result
+                ? "Код коректний!"
+                : "Помилка: дужки некоректні!");
+
+            // Вивести результат на веб-сторінці
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = result
+                ? "Код коректний!"
+                : "Помилка: дужки некоректні!";
+        }
+    </script>
+</body>
+</html>
