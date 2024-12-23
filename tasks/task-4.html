@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concerts Functionality</title>
+    <script>
+        // Concerts functionality
+        const concerts = {
+            Київ: new Date("2020-04-01"),
+            Умань: new Date("2025-07-02"),
+            Вінниця: new Date("2020-04-21"),
+            Одеса: new Date("2025-03-15"),
+            Хмельницький: new Date("2020-04-18"),
+            Харків: new Date("2025-07-10"),
+        };
+
+        // Function to process concerts
+        const processConcerts = () => {
+            const currentDate = new Date();
+
+            // Get array of cities with future concerts and sort them
+            const futureConcerts = Object.entries(concerts)
+                .filter(([_, date]) => date > currentDate) // Filter only future concerts
+                .sort(([, dateA], [, dateB]) => dateA - dateB) // Sort by date
+                .map(([city]) => city); // Get only city names
+
+            const output = document.getElementById("output");
+            output.innerHTML = "<strong>Future concerts (chronologically):</strong> " + futureConcerts.join(", ");
+
+            return futureConcerts;
+        };
+
+        // Function to test all functionality
+        const testAll = () => {
+            console.clear();
+            console.log("Testing All Functionality");
+            console.log("======================");
+
+            // Test concerts
+            console.log("1. Processing Concerts:");
+            const futureConcerts = processConcerts();
+            console.log("Future concerts:", futureConcerts);
+
+            // Additional placeholder for other tests
+            console.log("\n2. Additional functionality can be added here.");
+        };
+    </script>
+</head>
+<body>
+    <h1>Concerts Functionality</h1>
+    <button onclick="processConcerts()">Process Concerts</button>
+    <button onclick="testAll()">Test All</button>
+    <div id="output" style="margin-top: 20px; font-size: 1.2em;"></div>
+
+    <script>
+        console.log("Available commands:");
+        console.log("processConcerts() - Process concerts data");
+        console.log("testAll() - Run all tests");
+    </script>
+</body>
+</html>

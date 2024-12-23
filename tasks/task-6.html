@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicines Discount</title>
+    <script>
+        const medicines = [
+            { name: "Noshpa", price: 170 },
+            { name: "Analgin", price: 55 },
+            { name: "Quanil", price: 310 },
+            { name: "Alphacholine", price: 390 },
+        ];
+
+        // Function to apply discount and add IDs
+        const applyDiscount = (medicines) => {
+            return medicines.map((medicine, index) => {
+                if (medicine.price > 300) {
+                    return {
+                        id: index + 1,
+                        name: medicine.name,
+                        price: medicine.price,
+                        discountedPrice: +(medicine.price * 0.7).toFixed(2),
+                    };
+                }
+                return {
+                    id: index + 1,
+                    name: medicine.name,
+                    price: medicine.price,
+                };
+            });
+        };
+
+        // Display the result
+        const displayMedicines = () => {
+            const discountedMedicines = applyDiscount(medicines);
+            console.clear();
+            console.log("Updated Medicines List:");
+            discountedMedicines.forEach(med => {
+                const discountInfo = med.discountedPrice ? ` (Discounted Price: ${med.discountedPrice} грн)` : "";
+                console.log(`ID: ${med.id}, Name: ${med.name}, Price: ${med.price} грн${discountInfo}`);
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1>Medicines Discount</h1>
+    <button onclick="displayMedicines()">Show Discounted Medicines</button>
+</body>
+</html>

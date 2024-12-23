@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Constructor</title>
+    <script>
+        // Storage constructor function
+        function Storage(initialItems) {
+            this.items = initialItems;
+
+            // Method to get items
+            this.getItems = function () {
+                return this.items;
+            };
+
+            // Method to add an item
+            this.addItem = function (item) {
+                this.items.push(item);
+            };
+
+            // Method to remove an item
+            this.removeItem = function (item) {
+                const index = this.items.indexOf(item);
+                if (index !== -1) {
+                    this.items.splice(index, 1);
+                }
+            };
+        }
+
+        // Example usage
+        const arr = ["apple", "banana", "mango"];
+        const storage = new Storage(arr);
+
+        // Display storage operations in console
+        const testStorage = () => {
+            console.clear();
+
+            console.log("Initial items:", storage.getItems());
+
+            storage.addItem("orange");
+            console.log("After adding 'orange':", storage.getItems());
+
+            storage.removeItem("banana");
+            console.log("After removing 'banana':", storage.getItems());
+        };
+    </script>
+</head>
+<body>
+    <h1>Storage Management</h1>
+    <button onclick="testStorage()">Test Storage Operations</button>
+</body>
+</html>
